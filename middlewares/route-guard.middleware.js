@@ -17,6 +17,7 @@ const isAuthenticated = (req, res, next) => {
   }
 }
 
+// Example of another middleware
 const isAdmin = async (req, res, next) => {
   const currentUser = await User.findById(req.tokenPayload.userId)
   if (currentUser.roles?.includes('ADMIN')) {

@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/User.model')
 const bcrypt = require('bcryptjs')
-const { isAuthenticated, isAdmin } = require('../middlewares/route-guard.middleware')
+const { isAuthenticated } = require('../middlewares/route-guard.middleware')
 
 const router = require('express').Router()
 
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
   }
 })
 
-router.get('/verify', isAuthenticated, isAdmin, async (req, res) => {
+router.get('/verify', isAuthenticated, async (req, res) => {
   console.log(req.tokenPayload)
   const currentUser = await User.findById(req.tokenPayload.userId)
   res.status(200).json(currentUser)
